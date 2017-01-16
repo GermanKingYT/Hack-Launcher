@@ -2,5 +2,5 @@
 ___
 #TODO:
 - Protect against SQL Injection
-
-![Preview1](https://i.gyazo.com/26a1938c0df4ecd28a3abd15e6589fc3.png)
+- Make a sick looking Design
+![Preview1](https://i.gyazo.com/9018226bc75a1a983d822e687a6f38c5.png)
