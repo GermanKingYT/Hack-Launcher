@@ -1,10 +1,11 @@
 <?php
 
-$dbhost   	= "HOST";
-$dbname   	= "DB-NAME";
-$dbuser   	= "DB-USER";
-$dbpass   	= "DB-PASS";
-
+$dbhost   		= "HOST";
+$dbname   		= "DB-NAME";
+$dbuser   		= "DB-USER";
+$dbpass   		= "DB-PASS";
+$encryptionPass	= "ENCRYPTION-PASSWORD";
+	
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
 {
 	$mysqli = new mysqli($dbhost, $dbuser , $dbpass, $dbname);
@@ -15,12 +16,16 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	$active		= "false";
 	$try		= "0";
 
+	$encrypted_user	= openssl_encrypt($user,"AES-128-ECB",$encryptionPass);
+	$encrypted_pass	= openssl_encrypt($pass,"AES-128-ECB",$encryptionPass);
+	$encrypted_hwid	= openssl_encrypt($hwid ,"AES-128-ECB",$encryptionPass);
+	
 	if ($mysqli->connect_errno)  {
 		die("Connection Failed: " . $mysqli->connect_error);
 	}
 
-	$check_hwid			= "SELECT * FROM Users WHERE hwid='" . $hwid . "'";
-	$check_username 	= "SELECT * FROM Users WHERE username='" . $user . "'";
+	$check_hwid			= "SELECT * FROM Users WHERE hwid='" . $encrypted_hwid . "'";
+	$check_username 	= "SELECT * FROM Users WHERE username='" . $encrypted_user . "'";
 	$result_hwid		= $mysqli->query($check_hwid);
 	$result_username 	= $mysqli->query($check_username);
 	
@@ -32,7 +37,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("User already exists");
 	}
 	
-	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `try`, `active`) VALUES ('" . $user . "', '" . $pass . "', '" . $hwid . "', '" . $try . "', '" . $active . "')";
+	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `try`, `active`) VALUES ('" . $encrypted_user . "', '" . $encrypted_pass . "', '" . $encrypted_hwid . "', '" . $try . "', '" . $active . "')";
 	$result = $mysqli->query($sql);
 
 	if (!$result) {
