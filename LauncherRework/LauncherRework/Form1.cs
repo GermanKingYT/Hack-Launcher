@@ -186,6 +186,11 @@ namespace LauncherRework
                     || Globals.CheckStatus.Equals("HWID Changed")
                     || Globals.CheckStatus.Equals("No Subscription")
                     || Globals.CheckStatus.Equals("Error: failed executing command")
+                    || Globals.CheckStatus.Equals("Wrong Password, 3 Try's Left")
+                    || Globals.CheckStatus.Equals("Wrong Password, 2 Try's Left")
+                    || Globals.CheckStatus.Equals("Wrong Password, 1 Try Left")
+                    || Globals.CheckStatus.Equals("Account is now Locked please Message an Admin")
+                    || Globals.CheckStatus.Equals("Account is Locked please message an Admin")
                     || Globals.CheckStatus.Equals("Connection Failed: Could not Connect to Server"))
                     StatusLabel.Text = Globals.CheckStatus;
                 else if (Globals.CheckStatus.Equals("Successfully Logged in."))

@@ -31,10 +31,36 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("User does not exist");
 	}
 	
-	if ($pass != $userRow['password']) {
-		die("Wrong Password");
+	if ($userRow['try'] == "4") {
+		die ("Account is Locked please message an Admin");
 	}
-
+	
+	if ($pass != $userRow['password']) {
+		if ($userRow['try'] == "0") {
+			$cmd = "UPDATE Users SET try='1' WHERE username='" . $user . "'";
+			$mysqli->query($cmd);
+			die("Wrong Password, 3 Try's Left");
+		}
+		if ($userRow['try'] == "1") {
+			$cmd = "UPDATE Users SET try='2' WHERE username='" . $user . "'";
+			$mysqli->query($cmd);
+			die("Wrong Password, 2 Try's Left");
+		}
+		if ($userRow['try'] == "2") {
+			$cmd = "UPDATE Users SET try='3' WHERE username='" . $user . "'";
+			$mysqli->query($cmd);
+			die("Wrong Password, 1 Try Left");
+		}
+		if ($userRow['try'] == "3") {
+			$cmd = "UPDATE Users SET try='4' WHERE username='" . $user . "'";
+			$mysqli->query($cmd);
+			die("Account is now Locked please Message an Admin");
+		}
+	} else {
+		$cmd = "UPDATE Users SET try='0' WHERE username='" . $user . "'";
+		$mysqli->query($cmd);
+	}
+	
 	if ($hwid != $userRow['hwid']) {
 		die("HWID Changed");
 	}

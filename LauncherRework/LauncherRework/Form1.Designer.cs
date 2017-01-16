@@ -46,7 +46,7 @@ namespace LauncherRework
             // 
             this.UsernameTextbox.Location = new System.Drawing.Point(76, 12);
             this.UsernameTextbox.Name = "UsernameTextbox";
-            this.UsernameTextbox.Size = new System.Drawing.Size(141, 20);
+            this.UsernameTextbox.Size = new System.Drawing.Size(201, 20);
             this.UsernameTextbox.TabIndex = 0;
             // 
             // label1
@@ -63,7 +63,7 @@ namespace LauncherRework
             this.PasswordTextbox.Location = new System.Drawing.Point(76, 38);
             this.PasswordTextbox.Name = "PasswordTextbox";
             this.PasswordTextbox.PasswordChar = '*';
-            this.PasswordTextbox.Size = new System.Drawing.Size(141, 20);
+            this.PasswordTextbox.Size = new System.Drawing.Size(201, 20);
             this.PasswordTextbox.TabIndex = 2;
             // 
             // label2
@@ -79,7 +79,7 @@ namespace LauncherRework
             // 
             this.LoginButton.Location = new System.Drawing.Point(12, 95);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(100, 26);
+            this.LoginButton.Size = new System.Drawing.Size(137, 26);
             this.LoginButton.TabIndex = 4;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@ namespace LauncherRework
             // 
             // RegisterButton
             // 
-            this.RegisterButton.Location = new System.Drawing.Point(118, 95);
+            this.RegisterButton.Location = new System.Drawing.Point(155, 95);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(99, 26);
+            this.RegisterButton.Size = new System.Drawing.Size(122, 26);
             this.RegisterButton.TabIndex = 7;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@ namespace LauncherRework
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(229, 133);
+            this.ClientSize = new System.Drawing.Size(289, 133);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.RegisterButton);

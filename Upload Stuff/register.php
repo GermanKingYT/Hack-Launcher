@@ -13,6 +13,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	$pass       = mysqli_real_escape_string($mysqli, $_POST['password']);
 	$hwid      	= mysqli_real_escape_string($mysqli, $_POST['hwid']);
 	$active		= "false";
+	$try		= "0";
 
 	if ($mysqli->connect_errno)  {
 		die("Connection Failed: " . $mysqli->connect_error);
@@ -31,8 +32,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("User already exists");
 	}
 	
-	// Change TestDB to your DB Name
-	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `active`) VALUES ('" . $user . "', '" . $pass . "', '" . $hwid . "', '" . $active . "')";
+	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `try`, `active`) VALUES ('" . $user . "', '" . $pass . "', '" . $hwid . "', '" . $try . "', '" . $active . "')";
 	$result = $mysqli->query($sql);
 
 	if (!$result) {

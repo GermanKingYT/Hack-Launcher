@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `hwid` varchar(255) DEFAULT NULL,
+  `try` varchar(255) DEFAULT NULL,
   `active` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
