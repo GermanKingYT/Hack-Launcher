@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("Connection Failed: " . $mysqli->connect_error);
 	}
 
-	$check_hwid			= "SELECT * FROM Users WHERE hwid='" . $encrypted_hwid . "'";
+	$check_hwid		= "SELECT * FROM Users WHERE hwid='" . $encrypted_hwid . "'";
 	$check_username 	= "SELECT * FROM Users WHERE username='" . $encrypted_user . "'";
 	$result_hwid		= $mysqli->query($check_hwid);
 	$result_username 	= $mysqli->query($check_username);
