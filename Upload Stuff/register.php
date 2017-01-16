@@ -1,9 +1,9 @@
 <?php
 
-$dbhost   		= "HOST";
-$dbname   		= "DB-NAME";
-$dbuser   		= "DB-USER";
-$dbpass   		= "DB-PASS";
+$dbhost   = "HOST";
+$dbname   = "DB-NAME";
+$dbuser   = "DB-USER";
+$dbpass   = "DB-PASS";
 
 $encryptionPass	= "ENCRYPTION-PASSWORD";
 	
