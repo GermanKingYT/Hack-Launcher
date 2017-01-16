@@ -1,18 +1,18 @@
 <?php
 
-$dbhost   		= "HOST";
-$dbname   		= "DB-NAME";
-$dbuser   		= "DB-USER";
-$dbpass   		= "DB-PASS";
+$dbhost   	= "HOST";
+$dbname   	= "DB-NAME";
+$dbuser   	= "DB-USER";
+$dbpass   	= "DB-PASS";
 $encryptionPass	= "ENCRYPTION-PASSWORD";
 	
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
 {
-	$mysqli = new mysqli($dbhost, $dbuser , $dbpass, $dbname);
+	$mysqli 	= new mysqli($dbhost, $dbuser , $dbpass, $dbname);
 	
-	$user       = mysqli_real_escape_string($mysqli, $_POST['username']);
-	$pass       = mysqli_real_escape_string($mysqli, $_POST['password']);
-	$hwid      	= mysqli_real_escape_string($mysqli, $_POST['hwid']);
+	$user		= mysqli_real_escape_string($mysqli, $_POST['username']);
+	$pass		= mysqli_real_escape_string($mysqli, $_POST['password']);
+	$hwid		= mysqli_real_escape_string($mysqli, $_POST['hwid']);
 	$active		= "false";
 	$try		= "0";
 
