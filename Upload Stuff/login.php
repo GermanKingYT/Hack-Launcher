@@ -7,12 +7,12 @@ $dbpass   	= "DB-PASS";
 
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
 {
-	$user       = $_POST['username'];
-	$pass       = $_POST['password'];
-	$hwid      	= $_POST['hwid'];
-	$active		= "true";
-	
 	$mysqli = new mysqli($dbhost, $dbuser , $dbpass, $dbname);
+	
+	$user       = mysqli_real_escape_string($mysqli, $_POST['username']);
+	$pass       = mysqli_real_escape_string($mysqli, $_POST['password']);
+	$hwid      	= mysqli_real_escape_string($mysqli, $_POST['hwid']);
+	$active		= "true";
 
 	if ($mysqli->connect_errno)  {
 		die("Connection Failed: Could not Connect to Server");
