@@ -31,6 +31,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("You already have an Account");
 	}
 	
+	// Change TestDB to your DB Name
 	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `active`) VALUES ('" . $user . "', '" . $pass . "', '" . $hwid . "', '" . $active . "')";
 	$result = $mysqli->query($sql);
 
