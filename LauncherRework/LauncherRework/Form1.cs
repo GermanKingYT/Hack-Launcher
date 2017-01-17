@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -11,6 +13,16 @@ namespace LauncherRework
         {
             InitializeComponent();
         }
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+            int Msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         // Login Button
         private void LoginButton_Click(object sender, EventArgs e)
@@ -192,15 +204,63 @@ namespace LauncherRework
                     || Globals.CheckStatus.Equals("Account is now Locked please Message an Admin")
                     || Globals.CheckStatus.Equals("Account is Locked please message an Admin")
                     || Globals.CheckStatus.Equals("Connection Failed: Could not Connect to Server"))
+                    // Update Status Label
                     StatusLabel.Text = Globals.CheckStatus;
                 else if (Globals.CheckStatus.Equals("Successfully Logged in."))
+                    // Update Status Label
                     StatusLabel.Text = Globals.CheckStatus;
                 else
+                    // Show MessageBox
                     MessageBox.Show("Error: " + Globals.CheckStatus, "Status");
             };
 
             // Run Background Worker
             BW.RunWorkerAsync();
+        }
+
+        // Enable Dragging for our "Custom Design"
+        private void EnableWindowDragging(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        // Close Form
+        private void FormCloseButton_Click(object sender, EventArgs e)
+        {
+            // Exit Programm
+            Application.Exit();
+        }
+
+        // On MouseOver
+        private void FormCloseButton_MouseHover(object sender, EventArgs e)
+        {
+            // Change "Text" Color to White
+            FormCloseButton.ForeColor = Color.White;
+        }
+
+        // On MouseLeave
+        private void FormCloseButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Change "Text" Color to Black
+            FormCloseButton.ForeColor = Color.Black;
+        }
+
+        // Login Button MouseUp Event
+        private void LoginButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Give Focus to Username Textbox to prevent the weird fous border on buttons
+            UsernameTextbox.Focus();
+        }
+
+        // Register Button MouseUp Event
+        private void RegisterButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Give Focus to Username Textbox to prevent the weird fous border on buttons
+            UsernameTextbox.Focus();
         }
     }
 }
