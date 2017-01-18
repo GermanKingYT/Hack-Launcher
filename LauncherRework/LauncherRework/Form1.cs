@@ -206,7 +206,7 @@ namespace LauncherRework
 
             if (Globals.CheckStatus.Equals("Code: 694143"))
             {
-                StatusLabel.Text = "";
+                StatusLabel.Text = "Error checking Data";
                 return;
             }
 
