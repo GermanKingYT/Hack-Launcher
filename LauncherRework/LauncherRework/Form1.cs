@@ -194,7 +194,7 @@ namespace LauncherRework
             BW.RunWorkerAsync();
         }
 
-        // TODO: You may wnat to change these so you habe unique ones
+        // TODO: You may want to change these so you have unique ones
         // Read the Website Output
         private void ReadCode()
         {
