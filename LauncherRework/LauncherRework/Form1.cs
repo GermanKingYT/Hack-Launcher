@@ -236,7 +236,7 @@ namespace LauncherRework
 
             if (Globals.CheckStatus.Equals("Code: 865696"))
             {
-                StatusLabel.Text = "Wrong Password, 1 Try's left";
+                StatusLabel.Text = "Wrong Password, 1 Try left";
                 return;
             }
 
