@@ -84,9 +84,11 @@ namespace LauncherRework
             {
                 // Check Response Status
                 if (Response != null)
+                    // Close Response Stream
                     Response.Close();
             }
 
+            // Set FinishedRegister to true
             return Globals.FinishedRegister = true;
         }
 
@@ -148,9 +150,11 @@ namespace LauncherRework
             {
                 // Check Response Status
                 if (Response != null)
+                    // Close Response Stream
                     Response.Close();
             }
 
+            // Set Finished Checking to true
             return Globals.FinishedChecking = true;
         }
     }

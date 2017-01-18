@@ -204,36 +204,47 @@ namespace LauncherRework
         // Read the Register Output
         private void ReadRegisterCode()
         {
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 731446"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Could not Connect to Server";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 269598"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "You already have an Account";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 708385"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "User already exists";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 160674"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Could not Register Account";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 934045"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Successfully Registered";
                 return;
             }
 
+            // Set StatusLabel Text
             StatusLabel.Text = "Could not Translate Code";
         }
 
@@ -241,78 +252,102 @@ namespace LauncherRework
         // Read the Check User Output
         private void ReadCheckUserCode()
         {
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 731446"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Could not Connect to Server";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 694143"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Error checking Data";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 107177"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "User does not exist";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 933545"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Account is currently locked";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 974498"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Wrong Password, 3 Try's left";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 375292"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Wrong Password, 2 Try's left";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 865696"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Wrong Password, 1 Try left";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 548234"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Wrong Password, Account is now locked";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 526798"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "HWID Changed";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 913280"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "No Subscription";
                 return;
             }
 
+            // Check the Code from the PHP Script
             if (Globals.CheckStatus.Equals("Code: 959201"))
             {
+                // Translate the Code, Update the StatusLabel & exit the Functionv
                 StatusLabel.Text = "Successfully logged in";
                 return;
             }
 
+            // Set StatusLabel Text
             StatusLabel.Text = "Could not Translate Code";
         }
 
         // Enable Dragging for our "Custom Design"
         private void EnableWindowDragging(object sender, MouseEventArgs e)
         {
+            // Check if Left Mouse Button is pressed
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
