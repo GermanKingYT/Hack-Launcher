@@ -9,13 +9,13 @@ namespace LauncherRework
 {
     public partial class Form1 : Form
     {
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd,
@@ -120,20 +120,14 @@ namespace LauncherRework
             BW.RunWorkerCompleted += delegate
             {
                 // Return if Status is null
-                if (Globals.RegisterStatus == null)
+                if (Globals.CheckStatus == null)
                 {
-                    StatusLabel.Text = "Failed";
+                    StatusLabel.Text = "Failed getting Status";
                     return;
                 }
 
-                // If login.php output equals
-                if (Globals.RegisterStatus.Equals("User already exists") ||
-                    Globals.RegisterStatus.Equals("You already have an Account"))
-                    StatusLabel.Text = Globals.RegisterStatus;
-                else if (Globals.RegisterStatus.Equals("Registered"))
-                    StatusLabel.Text = Globals.RegisterStatus;
-                else
-                    MessageBox.Show(Globals.RegisterStatus, "Status");
+                // Read/Translate Website Output
+                ReadCode();
             };
 
             // Run Background Worker
@@ -188,34 +182,113 @@ namespace LauncherRework
                 // Return if Status is null
                 if (Globals.CheckStatus == null)
                 {
-                    StatusLabel.Text = "Failed";
+                    StatusLabel.Text = "Failed getting Status";
                     return;
                 }
 
-                // If login.php output equals
-                if (Globals.CheckStatus.Equals("User does not exist")
-                    || Globals.CheckStatus.Equals("Wrong Password")
-                    || Globals.CheckStatus.Equals("HWID Changed")
-                    || Globals.CheckStatus.Equals("No Subscription")
-                    || Globals.CheckStatus.Equals("Error: failed executing command")
-                    || Globals.CheckStatus.Equals("Wrong Password, 3 Try's Left")
-                    || Globals.CheckStatus.Equals("Wrong Password, 2 Try's Left")
-                    || Globals.CheckStatus.Equals("Wrong Password, 1 Try Left")
-                    || Globals.CheckStatus.Equals("Account is now Locked please Message an Admin")
-                    || Globals.CheckStatus.Equals("Account is Locked please message an Admin")
-                    || Globals.CheckStatus.Equals("Connection Failed: Could not Connect to Server"))
-                    // Update Status Label
-                    StatusLabel.Text = Globals.CheckStatus;
-                else if (Globals.CheckStatus.Equals("Successfully Logged in."))
-                    // Update Status Label
-                    StatusLabel.Text = Globals.CheckStatus;
-                else
-                    // Show MessageBox
-                    MessageBox.Show("Error: " + Globals.CheckStatus, "Status");
+                // Read/Translate Website Output
+                ReadCode();
             };
 
             // Run Background Worker
             BW.RunWorkerAsync();
+        }
+
+        // TODO: You may wnat to change these so you habe unique ones
+        // Read the Website Output
+        private void ReadCode()
+        {
+            if (Globals.CheckStatus.Equals("Code: 731446"))
+            {
+                StatusLabel.Text = "Could not Connect to Server";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 694143"))
+            {
+                StatusLabel.Text = "";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 107177"))
+            {
+                StatusLabel.Text = "User does not exist";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 933545"))
+            {
+                StatusLabel.Text = "Account is currently locked";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 974498"))
+            {
+                StatusLabel.Text = "Wrong Password, 3 Try's left";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 375292"))
+            {
+                StatusLabel.Text = "Wrong Password, 2 Try's left";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 865696"))
+            {
+                StatusLabel.Text = "Wrong Password, 1 Try's left";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 548234"))
+            {
+                StatusLabel.Text = "Wrong Password, Account is now locked";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 526798"))
+            {
+                StatusLabel.Text = "HWID Changed";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 913280"))
+            {
+                StatusLabel.Text = "No Subscription";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 959201"))
+            {
+                StatusLabel.Text = "Successfully logged in";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 269598"))
+            {
+                StatusLabel.Text = "You already have an Account";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 708385"))
+            {
+                StatusLabel.Text = "User already exists";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 160674"))
+            {
+                StatusLabel.Text = "Could not Register Account";
+                return;
+            }
+
+            if (Globals.CheckStatus.Equals("Code: 934045"))
+            {
+                StatusLabel.Text = "Successfully Registered";
+                return;
+            }
+
+            StatusLabel.Text = "Could not Translate Code";
         }
 
         // Enable Dragging for our "Custom Design"
