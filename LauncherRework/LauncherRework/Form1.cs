@@ -77,6 +77,9 @@ namespace LauncherRework
         // Start Register User Functions
         public void RegisterUser()
         {
+            // Set RegisterStatus back to Default
+            Globals.RegisterStatus = null;
+
             // Set Finished Checking back to Default
             Globals.FinishedRegister = false;
 
@@ -120,14 +123,14 @@ namespace LauncherRework
             BW.RunWorkerCompleted += delegate
             {
                 // Return if Status is null
-                if (Globals.CheckStatus == null)
+                if (Globals.RegisterStatus == null)
                 {
                     StatusLabel.Text = "Failed getting Status";
                     return;
                 }
 
                 // Read/Translate Website Output
-                ReadCode();
+                ReadRegisterCode();
             };
 
             // Run Background Worker
@@ -137,6 +140,9 @@ namespace LauncherRework
         // Start Check User Functions
         public void CheckUser()
         {
+            // Set CheckStatus back to Default
+            Globals.CheckStatus = null;
+
             // Set Finished Checking back to Default
             Globals.FinishedChecking = false;
 
@@ -187,7 +193,7 @@ namespace LauncherRework
                 }
 
                 // Read/Translate Website Output
-                ReadCode();
+                ReadCheckUserCode();
             };
 
             // Run Background Worker
@@ -195,8 +201,45 @@ namespace LauncherRework
         }
 
         // TODO: You may want to change these so you have unique ones
-        // Read the Website Output
-        private void ReadCode()
+        // Read the Register Output
+        private void ReadRegisterCode()
+        {
+            if (Globals.RegisterStatus.Equals("Code: 731446"))
+            {
+                StatusLabel.Text = "Could not Connect to Server";
+                return;
+            }
+
+            if (Globals.RegisterStatus.Equals("Code: 269598"))
+            {
+                StatusLabel.Text = "You already have an Account";
+                return;
+            }
+
+            if (Globals.RegisterStatus.Equals("Code: 708385"))
+            {
+                StatusLabel.Text = "User already exists";
+                return;
+            }
+
+            if (Globals.RegisterStatus.Equals("Code: 160674"))
+            {
+                StatusLabel.Text = "Could not Register Account";
+                return;
+            }
+
+            if (Globals.RegisterStatus.Equals("Code: 934045"))
+            {
+                StatusLabel.Text = "Successfully Registered";
+                return;
+            }
+
+            StatusLabel.Text = "Could not Translate Code";
+        }
+
+        // TODO: You may want to change these so you have unique ones
+        // Read the Check User Output
+        private void ReadCheckUserCode()
         {
             if (Globals.CheckStatus.Equals("Code: 731446"))
             {
@@ -261,30 +304,6 @@ namespace LauncherRework
             if (Globals.CheckStatus.Equals("Code: 959201"))
             {
                 StatusLabel.Text = "Successfully logged in";
-                return;
-            }
-
-            if (Globals.CheckStatus.Equals("Code: 269598"))
-            {
-                StatusLabel.Text = "You already have an Account";
-                return;
-            }
-
-            if (Globals.CheckStatus.Equals("Code: 708385"))
-            {
-                StatusLabel.Text = "User already exists";
-                return;
-            }
-
-            if (Globals.CheckStatus.Equals("Code: 160674"))
-            {
-                StatusLabel.Text = "Could not Register Account";
-                return;
-            }
-
-            if (Globals.CheckStatus.Equals("Code: 934045"))
-            {
-                StatusLabel.Text = "Successfully Registered";
                 return;
             }
 
