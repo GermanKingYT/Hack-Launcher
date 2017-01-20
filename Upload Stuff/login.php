@@ -1,9 +1,10 @@
 <?php
 
-$dbhost = "HOST";
-$dbname = "DB-NAME";
-$dbuser = "DB-USER";
-$dbpass = "DB-PASS";
+$dbhost  = "DB-HOST";
+$dbname  = "DB-NAME";
+$dbuser  = "DB-USER";
+$dbpass  = "DB-PASS";
+$dbtable = "DB-TABLE";
 
 $encryptionPass	= "ENCRYPTION-PASSWORD";
 
@@ -20,7 +21,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("Code: 731446");
 	}
 
-	$sql = "SELECT * FROM Users WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user) . "'";
+	$sql = "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result = $mysqli->query($sql);
 
 	if (!$result) {
@@ -39,28 +40,28 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	
 	if ($encrypted_pass != $userRow['password']) {
 		if ($userRow['try'] == "0") {
-			$cmd = "UPDATE Users SET try='1' WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user) . "'";
+			$cmd = "UPDATE ".$dbtable." SET try='1' WHERE username='".$encrypted_user."'";
 			$mysqli->query($cmd);
 			die("Code: 974498");
 		}
 		if ($userRow['try'] == "1") {
-			$cmd = "UPDATE Users SET try='2' WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user) . "'";
+			$cmd = "UPDATE ".$dbtable." SET try='2' WHERE username='".$encrypted_user."'";
 			$mysqli->query($cmd);
 			die("Code: 375292");
 		}
 		if ($userRow['try'] == "2") {
-			$cmd = "UPDATE Users SET try='3' WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user) . "'";
+			$cmd = "UPDATE ".$dbtable." SET try='3' WHERE username='".$encrypted_user."'";
 			$mysqli->query($cmd);
 			die("Code: 865696");
 		}
 		if ($userRow['try'] == "3") {
-			$cmd = "UPDATE Users SET try='4' WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user). "'";
+			$cmd = "UPDATE ".$dbtable." SET try='4' WHERE username='".$encrypted_user."'";
 			$mysqli->query($cmd);
 			die("Code: 548234");
 		}
 	}
 
-	$cmd = "UPDATE Users SET try='0' WHERE username='" . mysqli_real_escape_string($mysqli,$encrypted_user) . "'";
+	$cmd = "UPDATE ".$dbtable." SET try='0' WHERE username='".$encrypted_user."'";
 	$mysqli->query($cmd);
 	
 	if ($encrypted_hwid != $userRow['hwid']) {

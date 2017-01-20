@@ -1,9 +1,10 @@
 <?php
 
-$dbhost = "HOST";
-$dbname = "DB-NAME";
-$dbuser = "DB-USER";
-$dbpass = "DB-PASS";
+$dbhost  = "DB-HOST";
+$dbname  = "DB-NAME";
+$dbuser  = "DB-USER";
+$dbpass  = "DB-PASS";
+$dbtable = "DB-TABLE";
 
 $encryptionPass	= "ENCRYPTION-PASSWORD";
 	
@@ -21,8 +22,8 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("Code: 731446");
 	}
 
-	$check_hwid			= "SELECT * FROM Users WHERE hwid='".mysqli_real_escape_string($mysqli,$encrypted_hwid)."'";
-	$check_username 	= "SELECT * FROM Users WHERE username='".mysqli_real_escape_string($mysqli,$encrypted_user)."'";
+	$check_hwid			= "SELECT * FROM ".$dbtable." WHERE hwid='".$encrypted_hwid."'";
+	$check_username 	= "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result_hwid		= $mysqli->query($check_hwid);
 	$result_username 	= $mysqli->query($check_username);
 	
@@ -34,7 +35,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("Code: 708385");
 	}
 	
-	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `try`, `active`) VALUES ('".mysqli_real_escape_string($mysqli,$encrypted_user)."', '".mysqli_real_escape_string($mysqli,$encrypted_pass)."', '".mysqli_real_escape_string($mysqli,$encrypted_hwid)."', '".mysqli_real_escape_string($mysqli,$try)."', '".mysqli_real_escape_string($mysqli,$active)."')";
+	$sql = "INSERT INTO `TestDB`.`Users` (`username`, `password`, `hwid`, `try`, `active`) VALUES ('".$encrypted_user."', '".$encrypted_pass."', '".$encrypted_hwid."', '".$try."', '".$active."')";
 	$result = $mysqli->query($sql);
 
 	if (!$result) {
