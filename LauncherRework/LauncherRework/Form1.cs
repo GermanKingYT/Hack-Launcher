@@ -27,6 +27,9 @@ namespace LauncherRework
         // Login Button
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            // Give Focus to Username Textbox to prevent the weird fous border on buttons
+            UsernameTextbox.Focus();
+
             // Check if UsernameTextbox contains something
             if (UsernameTextbox.Text.Length == 0)
             {
@@ -52,6 +55,9 @@ namespace LauncherRework
         // Register Button
         private void RegisterButton_Click(object sender, EventArgs e)
         {
+            // Give Focus to Username Textbox to prevent the weird fous border on buttons
+            UsernameTextbox.Focus();
+
             // Check if UsernameTextbox contains something
             if (UsernameTextbox.Text.Length == 0)
             {
@@ -213,6 +219,14 @@ namespace LauncherRework
             }
 
             // Check the Code from the PHP Script
+            if (Globals.RegisterStatus.Equals("Code: 140483"))
+            {
+                // Translate the Code, Update the StatusLabel & exit the Function
+                StatusLabel.Text = "´Settings File not set up!";
+                return;
+            }
+
+            // Check the Code from the PHP Script
             if (Globals.RegisterStatus.Equals("Code: 269598"))
             {
                 // Translate the Code, Update the StatusLabel & exit the Function
@@ -257,6 +271,14 @@ namespace LauncherRework
             {
                 // Translate the Code, Update the StatusLabel & exit the Function
                 StatusLabel.Text = "Could not Connect to Server";
+                return;
+            }
+
+            // Check the Code from the PHP Script
+            if (Globals.CheckStatus.Equals("Code: 140483"))
+            {
+                // Translate the Code, Update the StatusLabel & exit the Function
+                StatusLabel.Text = "´Settings File not set up!";
                 return;
             }
 
@@ -374,20 +396,6 @@ namespace LauncherRework
         {
             // Change "Text" Color to Black
             FormCloseButton.ForeColor = Color.Black;
-        }
-
-        // Login Button MouseUp Event
-        private void LoginButton_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Give Focus to Username Textbox to prevent the weird fous border on buttons
-            UsernameTextbox.Focus();
-        }
-
-        // Register Button MouseUp Event
-        private void RegisterButton_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Give Focus to Username Textbox to prevent the weird fous border on buttons
-            UsernameTextbox.Focus();
         }
     }
 }

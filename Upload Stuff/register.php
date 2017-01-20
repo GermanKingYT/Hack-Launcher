@@ -1,16 +1,9 @@
 <?php
-
-$dbhost  = "DB-HOST";
-$dbname  = "DB-NAME";
-$dbuser  = "DB-USER";
-$dbpass  = "DB-PASS";
-$dbtable = "DB-TABLE";
-
-$encryptionPass	= "ENCRYPTION-PASSWORD";
-	
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
 {
-	$mysqli = new mysqli($dbhost, $dbuser , $dbpass, $dbname);
+	if(!@include("settings.php")){
+		die("Code: 140483");
+	}
 	
 	$encrypted_user	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['username']),"AES-128-ECB",$encryptionPass);
 	$encrypted_pass	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['password']),"AES-128-ECB",$encryptionPass);
@@ -18,10 +11,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	$active	= "false";
 	$try	= "0";
 	
-	if ($mysqli->connect_errno)  {
-		die("Code: 731446");
-	}
-
 	$check_hwid			= "SELECT * FROM ".$dbtable." WHERE hwid='".$encrypted_hwid."'";
 	$check_username 	= "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result_hwid		= $mysqli->query($check_hwid);
@@ -46,5 +35,4 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 
 	$mysqli->Close();
 }
-
 ?>

@@ -100,7 +100,6 @@ namespace LauncherRework
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
-            this.LoginButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LoginButton_MouseUp);
             // 
             // StatusLabel
             // 
@@ -130,7 +129,6 @@ namespace LauncherRework
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
-            this.RegisterButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RegisterButton_MouseUp);
             // 
             // panel1
             // 

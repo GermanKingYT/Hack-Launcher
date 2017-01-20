@@ -1,26 +1,15 @@
 <?php
-
-$dbhost  = "DB-HOST";
-$dbname  = "DB-NAME";
-$dbuser  = "DB-USER";
-$dbpass  = "DB-PASS";
-$dbtable = "DB-TABLE";
-
-$encryptionPass	= "ENCRYPTION-PASSWORD";
-
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
 {
-	$mysqli = new mysqli($dbhost, $dbuser , $dbpass, $dbname);
+	if(!@include("settings.php")){
+		die("Code: 140483");
+	}
 	
 	$encrypted_user	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['username']),"AES-128-ECB",$encryptionPass);
 	$encrypted_pass	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['password']),"AES-128-ECB",$encryptionPass);
 	$encrypted_hwid	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['hwid']),"AES-128-ECB",$encryptionPass);
 	$active	= "true";
 	
-	if ($mysqli->connect_errno)  {
-		die("Code: 731446");
-	}
-
 	$sql = "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result = $mysqli->query($sql);
 
@@ -76,5 +65,4 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	
 	$mysqli->Close();
 }
-
 ?>
