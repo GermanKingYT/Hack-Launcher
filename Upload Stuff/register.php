@@ -11,7 +11,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	$active	= "false";
 	$try	= "0";
 	
-	$check_hwid			= "SELECT * FROM ".$dbtable." WHERE hwid='".$encrypted_hwid."'";
+	$check_hwid		= "SELECT * FROM ".$dbtable." WHERE hwid='".$encrypted_hwid."'";
 	$check_username 	= "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result_hwid		= $mysqli->query($check_hwid);
 	$result_username 	= $mysqli->query($check_username);
