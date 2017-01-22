@@ -2,9 +2,10 @@
 {
     internal class Globals
     {
-        // Username, Password & HWID Stuff
+        // Username, Password, HWID & Token Stuff
         public static string Username = null;
         public static string Password = null;
+        public static string Token = null;
 
         // Status Stuff
         public static string CheckStatus = null;

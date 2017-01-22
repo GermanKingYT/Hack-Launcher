@@ -44,9 +44,10 @@ namespace LauncherRework
                 return;
             }
 
-            // Set Username & Password in Globals
+            // Set Username, Password & Token in Globals
             Globals.Username = UsernameTextbox.Text;
             Globals.Password = PasswordTextbox.Text;
+            Globals.Token = Functions.CreateString(65);
 
             // Start Check Function
             CheckUser();
@@ -173,6 +174,11 @@ namespace LauncherRework
                 var SecurePassword = Encryption.Encrypt(ScrambledPassword);
                 var SecureHWID = Encryption.Encrypt(ScrambledHWID);
 
+                // Scramble & Encrypt our Random String
+                var ScrambleToken = Functions.Scramble(Globals.Token);
+                // Set Encrypted Token in Globals
+                Globals.Token = ScrambleToken;
+
                 // We have to invoke this cause we want to change it from another Thread
                 Invoke((MethodInvoker) delegate
                 {
@@ -181,7 +187,7 @@ namespace LauncherRework
                 });
 
                 // Start Check Function
-                Functions.CheckUser(SecureUsername, SecurePassword, SecureHWID);
+                Functions.CheckUser(SecureUsername, SecurePassword, SecureHWID, Globals.Token);
 
                 // Wait for Check Function to Finish
                 while (!Globals.FinishedChecking)
@@ -355,10 +361,13 @@ namespace LauncherRework
             }
 
             // Check the Code from the PHP Script
-            if (Globals.CheckStatus.Equals("Code: 959201"))
+            if (Globals.CheckStatus.Equals(Globals.Token))
             {
                 // Translate the Code, Update the StatusLabel & exit the Functionv
                 StatusLabel.Text = "Successfully logged in";
+
+                //TODO: What to do after Successfully logged in?
+
                 return;
             }
 

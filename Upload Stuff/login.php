@@ -1,15 +1,16 @@
 <?php
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid'])) 
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid']) && isset($_POST['token']))
 {
 	if(!@include("settings.php")){
 		die("Code: 140483");
 	}
 	
-	$encrypted_user	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['username']),"AES-128-ECB",$encryptionPass);
-	$encrypted_pass	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['password']),"AES-128-ECB",$encryptionPass);
-	$encrypted_hwid	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['hwid']),"AES-128-ECB",$encryptionPass);
+	$encrypted_user	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['username']),"aes-256-gcm",$encryptionPass);
+	$encrypted_pass	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['password']),"aes-256-gcm",$encryptionPass);
+	$encrypted_hwid	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['hwid']),"aes-256-gcm",$encryptionPass);
+    $token = mysqli_real_escape_string($mysqli,$_POST['token']);
 	$active	= "true";
-	
+
 	$sql = "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
 	$result = $mysqli->query($sql);
 
@@ -61,7 +62,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 		die("Code: 913280");
 	}		
 			
-	die("Code: 959201");	
+	die($token);
 	
 	$mysqli->Close();
 }

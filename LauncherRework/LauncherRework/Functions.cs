@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,21 @@ namespace LauncherRework
 {
     internal class Functions
     {
+        // Create Random String
+        static Random rng = new Random();
+        internal static string CreateString(int stringLength)
+        {
+            const string allowedChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789=";
+            char[] chars = new char[stringLength];
+
+            for (int i = 0; i < stringLength; i++)
+            {
+                chars[i] = allowedChars[rng.Next(0, allowedChars.Length)];
+            }
+
+            return new string(chars);
+        }
+
         // Scramble Function
         public static string Scramble(string Text)
         {
@@ -93,7 +109,7 @@ namespace LauncherRework
         }
 
         // Check User Function
-        public static bool CheckUser(string User, string Pass, string Hwid)
+        public static bool CheckUser(string User, string Pass, string Hwid, string Token)
         {
             // ResponseStream String
             string ResponseStream = null;
@@ -112,7 +128,7 @@ namespace LauncherRework
                 Request.ContentType = "application/x-www-form-urlencoded";
 
                 // Command that will be send
-                var postData = "username=" + User + "&password=" + Pass + "&hwid=" + Hwid;
+                var postData = "username=" + User + "&password=" + Pass + "&hwid=" + Hwid + "&token=" + Token;
                 var byteArray = Encoding.UTF8.GetBytes(postData);
                 Request.ContentLength = byteArray.Length;
 
