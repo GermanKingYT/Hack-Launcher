@@ -8,7 +8,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['hwid
 	$encrypted_user	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['username']),"aes-256-gcm",$encryptionPass);
 	$encrypted_pass	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['password']),"aes-256-gcm",$encryptionPass);
 	$encrypted_hwid	= openssl_encrypt(mysqli_real_escape_string($mysqli,$_POST['hwid']),"aes-256-gcm",$encryptionPass);
-    $token = mysqli_real_escape_string($mysqli,$_POST['token']);
+    	$token = mysqli_real_escape_string($mysqli,$_POST['token']);
 	$active	= "true";
 
 	$sql = "SELECT * FROM ".$dbtable." WHERE username='".$encrypted_user."'";
